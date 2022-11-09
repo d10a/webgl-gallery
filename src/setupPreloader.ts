@@ -73,7 +73,7 @@ export function setupPreloader(selector: string, galleryWrapper: HTMLElement) {
     const query = {
       method: 'GET',
     }
-    const xhrResponse = await fetch('https://picsum.photos/v2/list?page=2&limit=50', query)
+    const xhrResponse = await fetch('https://picsum.photos/v2/list?page=2&limit=20', query)
     images = await xhrResponse.json()
     numberOfAssets = images.length
   }
