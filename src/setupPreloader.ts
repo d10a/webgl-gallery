@@ -59,10 +59,10 @@ export function setupPreloader(selector: string, galleryWrapper: HTMLElement) {
       });
 
       timeline.to(preloaderElement, {
-        autoAlpha: 0,
+        // autoAlpha: 0,
+        duration: 0.8,
         y: '100%',
         ease: 'expo.inOut',
-        duration: 1,
         onComplete: resolve
       })
 
