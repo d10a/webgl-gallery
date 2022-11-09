@@ -1,0 +1,121 @@
+@import 'styles/reset';
+@import 'styles/variables';
+@import 'styles/functions';
+@import 'styles/mixins';
+@import 'styles/responsive';
+@import 'styles/fonts';
+@import 'styles/base';
+@import 'styles/mouse-scroll';
+
+
+
+
+#preloader {
+  @extend %cover;
+  @extend %center;
+  z-index: z('preloader');
+  overflow: hidden;
+  background-color: $color-raison-black;
+  color: $color-cadet-blue;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-around;
+
+  .preloader__logo {
+    font-family: $font-advent-pro;
+    font-size: 3rem;
+    color: $color-persian-orange;
+
+    span {
+      width: auto;
+      height: auto;
+      position: relative;
+
+      span {
+        opacity: 0;
+        left: 0;
+        top: 100%;
+      }
+    }
+
+  }
+
+  .preloader__title {
+    font-size: 1.2rem;
+    text-align: center;
+    font-family: $font-adequate;
+    color: $color-cadet-blue;
+
+    @include responsive(tablet) {
+      //background: lightblue;
+    }
+
+    span {
+      display: block;
+      width: auto;
+      height: auto;
+      position: relative;
+      line-height: 3rem;
+
+      span {
+        opacity: 0;
+        left: 0;
+        top: 100%;
+      }
+    }
+
+
+  }
+
+  .preloader__progress__text {
+    font-size: 5rem;
+    font-weight: 100;
+    color: $color-cadet-blue;
+
+
+  }
+
+}
+
+/** GALLERY */
+
+
+#gallery {
+  @extend %page;
+  background-color: $color-bright-gray;
+  display: flex;
+  flex-flow: row nowrap;
+
+  .gallery__wrapper {
+    @extend %cover;
+    overflow: hidden;
+    width: auto;
+    max-height: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: end;
+    padding-bottom: 2rem;
+    padding-left: 2rem;
+    background: linear-gradient(0deg, $color-bright-gray 5%, $color-bright-gray 10%, $color-silver 40%, transparent 100%);
+
+
+
+    figure.gallery__media__wrapper {
+      height: auto;
+      width: 7rem;
+      margin: 0;
+      margin-right: 1rem;
+
+      img.gallery__media {
+        opacity: 0;
+        visibility: hidden;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+      }
+    }
+  }
+
+
+}

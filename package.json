@@ -1,0 +1,25 @@
+{
+  "name": "webgl-galery",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "build:dev": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "sass": "^1.55.0",
+    "typescript": "^4.6.4",
+    "vite": "^3.2.0",
+    "vite-plugin-string": "^1.1.2"
+  },
+  "dependencies": {
+    "@billjs/event-emitter": "^1.0.3",
+    "@types/node": "^18.11.9",
+    "gsap": "^3.11.3",
+    "normalize-wheel": "^1.0.1",
+    "ogl": "^0.0.102"
+  }
+}

@@ -1,0 +1,22 @@
+/**---------- MIXINS ---------**/
+%cover {
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    position: absolute;
+    top: 0;
+}
+
+%center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+%page {
+    @extend %cover;
+    opacity: 0;
+    visibility: hidden;
+    z-index: z('content');
+    transition: opacity 2000ms ease;
+}

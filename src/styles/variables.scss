@@ -1,0 +1,31 @@
+/**--------- VARIABLES --------**/
+$color-bright-gray: #37384C;
+$color-cadet-blue: #B2B8C3;
+$color-contessa: #C97164;
+$color-quicksand: #BC978C;
+$color-quarter-spanish-white: #F9F1E7;
+/* -------------------------------*/
+
+$color-raison-black: #242325;
+$color-persian-orange: #DC965A;
+$color-sage: #BBB891;
+$color-silver-chalice: #B3B3B3;
+$color-silver: #C8C8C8;
+
+
+$color-white: #fff;
+
+$font-advent-pro: 'Advent-Pro';
+$font-adequate: 'Adequate';
+$font-george-x: 'George X';
+$font-suisse-bp: 'Suisse BP';
+
+$ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+
+// Z indexes order list
+$z-indexes: (
+    'canvas',
+    'preloader',
+    'content',
+    // 'canvas',
+);

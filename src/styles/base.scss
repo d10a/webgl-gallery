@@ -1,0 +1,28 @@
+*,
+*:after,
+*:before {
+    box-sizing: border-box;
+    user-select: none;
+}
+
+html {
+    font-size: 16px;
+    line-height: 1;
+    overflow: hidden;
+    position: fixed;
+}
+
+body {
+    @extend %cover;
+    font-family: $font-suisse-bp;
+}
+
+#app {
+    @extend %cover;
+}
+
+canvas {
+    pointer-events: none;
+    position: relative;
+    z-index: z('canvas');
+}
