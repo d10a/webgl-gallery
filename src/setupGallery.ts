@@ -25,7 +25,6 @@ export function setupGallery(galleryOptions: GalleryOptions) {
   }
 
   const onResize = (event?: any) => {
-    console.log('resize')
     gallery.onResize(event)
   }
 

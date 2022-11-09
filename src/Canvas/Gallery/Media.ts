@@ -102,7 +102,6 @@ export default class Media {
     public onResize(sizes: SizesInterface) {
         this.texture.update()
         this.mesh.updateMatrix()
-        console.log('media resized')
         this.sizes = sizes
 
         this.updateScale()
@@ -124,7 +123,7 @@ export default class Media {
         if (scrollGallery.scroll.direction === undefined) {
             return 0
         }
-        console.log(scrollGallery.scroll.direction)
+
         switch (scrollGallery.scroll.direction) {
             case 'up':
                 this.x -= scrollGallery.pixelY
