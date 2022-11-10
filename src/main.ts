@@ -26,9 +26,9 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
     </h1>
     <h2 class="preloader__title">
       <span><span>David Gassama</span></span>
-      <span><span>Creative Developer Freelance</span></span>
+      <span><span>Creative Developer Freelance</span>&nbsp;</span>
     </h2>
-    <p class="preloader__progress__text">0%</p>
+    <p class="preloader__progress__text"></p>
   </div>
   <div id="gallery">
     <div class="mouse__scroll__wrapper">

@@ -15,8 +15,6 @@ interface GalleryOptions {
     galleryWrapper: Element
 }
 
-
-
 export default class Gallery extends Canvas {
 
     private mediasElements: Map<number, any>
@@ -152,7 +150,7 @@ export default class Gallery extends Canvas {
     public onResize(event: any): void {
         this.updateSizes()
 
-        this.scrollGallery.updateGallerySizes(
+        this.scrollGallery.onResize(
             this.galleryWrapper.getBoundingClientRect(),
             this.sizes
         )
@@ -160,7 +158,6 @@ export default class Gallery extends Canvas {
         this.medias.forEach((media: Media) => {
             media.onResize(this.sizes)
         })
-
 
     }
 
@@ -176,10 +173,10 @@ export default class Gallery extends Canvas {
 
     public onMouseWheel(event: any) {
         const { pixelX, pixelY } = NormalizeWheel(event)
-        this.scrollGallery.onMouseWheel(pixelX, pixelY)
+        this.scrollGallery.onScroll(pixelX, pixelY)
 
         this.medias.forEach((media: Media) => {
-            const meshPosition = media.onMouseWheel(this.scrollGallery)
+            const meshPosition = media.onScroll(this.scrollGallery)
 
             //intersection observer
             this.canvasIntersectionObserver.observe(
@@ -195,6 +192,44 @@ export default class Gallery extends Canvas {
         this.medias.forEach((media: Media) => {
             media.onMouseMove(mousePosition)
         })
+    }
+
+    public onTouchDown(event: any) {
+        this.scrollGallery.touch.isDown = true
+        this.scrollGallery.touch.startX = event.touches ? event.touches[0].clientX : event.clientX
+        this.scrollGallery.touch.startY = event.touches ? event.touches[0].clientY : event.clientY
+    }
+
+    public onTouchMove(event: any) {
+        if (!this.scrollGallery.touch.isDown) {
+            return
+        }
+
+        const distanceX = (event.touches)
+            ? (event.touches[0].clientX - this.scrollGallery.touch.startX)
+            : (event.clientX - event.touches[0].clientX)
+        const distanceY = (event.touches)
+            ? (event.touches[0].clientY - this.scrollGallery.touch.startY)
+            : (event.clientX - event.touches[0].clientY)
+
+        this.scrollGallery.onScroll(distanceX, distanceY)
+        this.medias.forEach((media: Media) => {
+            const meshPosition = media.onScroll(this.scrollGallery)
+
+            //     //intersection observer
+            //     // this.canvasIntersectionObserver.observe(
+            //     //     this.scrollGallery.scroll.direction,
+            //     //     this.sizes.canvas,
+            //     //     meshPosition
+            //     // )
+
+        })
+    }
+
+
+    public onTouchUp(event: any) {
+        this.scrollGallery.touch.isDown = false
+
     }
 
     destroy() {

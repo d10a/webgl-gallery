@@ -1,5 +1,6 @@
 import Gallery from "./Canvas/Gallery/Gallery";
 import gsap from 'gsap'
+import { isTouchEnabled } from "./utils/Touch";
 
 interface GalleryOptions {
   galleryElement: HTMLElement
@@ -24,14 +25,6 @@ export function setupGallery(galleryOptions: GalleryOptions) {
     gallery.bindEvents()
   }
 
-  const onResize = (event?: any) => {
-    gallery.onResize(event)
-  }
-
-  const onMouseWheel = (event: any) => {
-    gallery.onMouseWheel(event)
-  }
-
   const createCanvas = () => {
     gallery = new Gallery({
       appendTo: document.body,
@@ -39,11 +32,47 @@ export function setupGallery(galleryOptions: GalleryOptions) {
     });
   }
 
+  const onResize = (event?: any) => {
+    gallery.onResize(event)
+  }
+
+  const onMouseWheel = (event: any) => {
+    gallery.onMouseWheel(event)
+  }
+  const onTouchDown = (event: any) => {
+    gallery.onTouchDown(event)
+  }
+  const onTouchMove = (event: any) => {
+    gallery.onTouchMove(event)
+  }
+  const onTouchUp = (event: any) => {
+    gallery.onTouchUp(event)
+  }
+
+
+  /* Launch gallery */
   setGallery()
+
   window.onresize = (event: any) => onResize(event)
+
   window.addEventListener('mousewheel', (event: any) => {
     onMouseWheel(event)
   })
+
+  // if (isTouchEnabled()) {
+  window.addEventListener('touchstart', (event: any) => {
+    onTouchDown(event)
+  })
+
+  window.addEventListener('touchmove', (event: any) => {
+    onTouchMove(event)
+  })
+
+  window.addEventListener('touchend', (event: any) => {
+    onTouchUp(event)
+  })
+  // }
+
 
 
 }

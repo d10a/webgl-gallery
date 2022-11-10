@@ -155,7 +155,7 @@ export function setupPreloader(selector: string, galleryWrapper: HTMLElement) {
     length++
     const percent = length / numberOfAssets
 
-    if (progressElement) {
+    if (progressElement && percent > 0) {
       progressElement.innerHTML = `${Math.round(percent * 100)}%`
     }
 

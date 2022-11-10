@@ -73,6 +73,10 @@
     font-weight: 100;
     color: $color-cadet-blue;
 
+    @include responsive(desktop) {
+      font-size: 2rem;
+    }
+
 
   }
 

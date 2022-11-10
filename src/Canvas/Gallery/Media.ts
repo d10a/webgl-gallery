@@ -119,7 +119,7 @@ export default class Media {
         this.uniforms.uMouse = [mousePosition.x, mousePosition.y]
     }
 
-    public onMouseWheel(scrollGallery: ScrollGallery): any {
+    public onScroll(scrollGallery: ScrollGallery): any {
         if (scrollGallery.scroll.direction === undefined) {
             return 0
         }
@@ -149,8 +149,13 @@ export default class Media {
         // this.sizes.canvas / 2
 
         this.updateBounds()
-        this.updatePositionX(this.x)
-        this.updatePositionY(this.y)
+
+        //horizontal
+        if (['up', 'down'].includes(scrollGallery.scroll.direction)) {
+            this.updatePositionX(this.x)
+        }
+
+
 
         this.uniforms.uSpeed.value = scrollGallery.speed.current
 
