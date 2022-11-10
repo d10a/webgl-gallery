@@ -5,7 +5,8 @@ interface ScrollDirectionInterface {
     direction?: string
     currentX: number
     currentY: number
-    target: number
+    targetX: number
+    targetY: number
     lerp: number
     allowHorizontal: boolean
     allowVertical: boolean
@@ -65,7 +66,8 @@ export default class ScrollGallery {
         this.scroll = {
             currentX: 0,
             currentY: 0,
-            target: 0,
+            targetX: 0,
+            targetY: 0,
             lerp: 0.5,
             allowHorizontal: horizontal,
             allowVertical: vertical
@@ -80,17 +82,23 @@ export default class ScrollGallery {
         }
     }
 
+    public isTouchEvent(): boolean {
+        return this.touch.isDown
+    }
+
     public onScroll(pixelX: number, pixelY: number) {
-        if (this.touch.isDown) {
-            pixelY = pixelY * 0.2
-            this.scroll.lerp = 0.3
+        //si touch event
+        if (this.isTouchEvent()) {
+            pixelY *= 0.3
+            pixelX *= 0.1
+            this.scroll.lerp = 0.005
         }
 
         this.pixelX = pixelX
         this.pixelY = pixelY
 
         if (this.scroll.allowVertical) {
-            this.scroll.target += pixelY
+            this.scroll.targetY += pixelY
             if (pixelY > 0) {
                 this.scroll.direction = 'up'
             }
@@ -100,7 +108,7 @@ export default class ScrollGallery {
         }
 
         if (this.scroll.allowHorizontal) {
-            this.scroll.target += pixelX
+            this.scroll.targetX += pixelX
             if (pixelX > 0) {
                 this.scroll.direction = 'left'
             }
@@ -109,7 +117,9 @@ export default class ScrollGallery {
             }
         }
 
-        this.scroll.target += pixelY
+        console.log(this.scroll.direction)
+
+        // this.scroll.targetY += pixelY
         this.velocity = (pixelX > 0 || pixelY > 0) ? 3 : - 3
 
         this.isScrolling = true
@@ -117,17 +127,30 @@ export default class ScrollGallery {
         if (this.scroll.allowVertical) {
             this.updateY()
         }
+        if (this.scroll.allowHorizontal) {
+            this.updateX()
+        }
 
     }
 
-    private updateY() {
-        this.scroll.target += this.velocity
+    private updateX() {
+        this.scroll.targetX += this.velocity
         //speed
-        this.speed.target = (this.scroll.target - this.scroll.currentY) * 0.0005
+        this.speed.target = (this.scroll.targetX - this.scroll.currentX) * 0.0005
         this.speed.current = gsap.utils.interpolate(this.speed.current, this.speed.target, this.speed.lerp)
 
-        //current Y
-        this.scroll.currentY = gsap.utils.interpolate(this.scroll.currentY, this.scroll.target, this.scroll.lerp)
+        this.scroll.currentX = gsap.utils.interpolate(this.scroll.currentX, this.scroll.targetX, this.scroll.lerp)
+
+        this.x = this.scroll.currentX
+    }
+
+    private updateY() {
+        this.scroll.targetY += this.velocity
+        //speed
+        this.speed.target = (this.scroll.targetY - this.scroll.currentY) * 0.0005
+        this.speed.current = gsap.utils.interpolate(this.speed.current, this.speed.target, this.speed.lerp)
+
+        this.scroll.currentY = gsap.utils.interpolate(this.scroll.currentY, this.scroll.targetY, this.scroll.lerp)
 
         this.y = this.scroll.currentY
     }

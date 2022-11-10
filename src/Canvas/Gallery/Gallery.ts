@@ -36,7 +36,7 @@ export default class Gallery extends Canvas {
         this.mediasElements = Asset.getInstance().listImagesElements()
         this.galleryWrapper = galleryOptions.galleryWrapper
         this.group = new Transform()
-        this.scrollGallery = new ScrollGallery(false, true)
+        this.scrollGallery = new ScrollGallery(true, true)
 
         this.mousePosition = {
             x: 0,

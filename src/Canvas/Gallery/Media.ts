@@ -131,18 +131,12 @@ export default class Media {
             case 'down':
                 this.x += -scrollGallery.pixelY
                 break;
-            // case 'up':
-            //     this.y += -scrollGallery.pixelY
-            //     break;
-            // case 'down':
-            //     this.y -= scrollGallery.pixelY
-            //     break;
-            // case 'left':
-            //     this.x += -scrollGallery.pixelX
-            //     break;
-            // case 'right':
-            //     this.x -= scrollGallery.pixelX
-            //     break;
+            case 'right':
+                this.x += scrollGallery.pixelX
+                break;
+            case 'left':
+                this.x -= -scrollGallery.pixelX
+                break;
         }
 
         //calculate extra
@@ -151,9 +145,16 @@ export default class Media {
         this.updateBounds()
 
         //horizontal
-        if (['up', 'down'].includes(scrollGallery.scroll.direction)) {
-            this.updatePositionX(this.x)
+        if (scrollGallery.isTouchEvent()) {
+            if (['left', 'right'].includes(scrollGallery.scroll.direction)) {
+                this.updatePositionX(this.x)
+            }
+        } else {
+            if (['up', 'down'].includes(scrollGallery.scroll.direction)) {
+                this.updatePositionX(this.x)
+            }
         }
+
 
 
 
