@@ -46,7 +46,7 @@ export default abstract class Canvas {
     private createCamera() {
         this.camera = new Camera(this.gl);
         // this.camera.fov = 45
-        this.camera.position.z = 100;
+        // this.camera.position.z = 50;
     }
 
     protected updateSizes() {

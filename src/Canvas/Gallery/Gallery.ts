@@ -28,7 +28,11 @@ export default class Gallery extends Canvas {
     private scrollGallery: ScrollGallery
     private mediaFullscreen: MediaFullscreen
     private canvasIntersectionObserver: CanvasIntersectionObserver
-
+    private cam = {
+        x: 0,
+        y: 0,
+        z: 0
+    }
 
     constructor(galleryOptions: GalleryOptions) {
         super(galleryOptions.appendTo, 'canvas__gallery')
@@ -51,8 +55,13 @@ export default class Gallery extends Canvas {
         this.group.setParent(this.scene)
 
         this.camera.fov = 45
-        // this.camera.position.set(3, 2., 4)
-        // this.camera.lookAt([1, 0.5, 0])
+        // this.camera.position.x = 0
+        // this.camera.position.y = 0
+        this.camera.position.z = 50
+        // // this.camera.position.set(2, 2, 4)
+        // this.camera.lookAt([0, 0, 0])
+
+
         this.updateSizes()
 
 
@@ -112,10 +121,10 @@ export default class Gallery extends Canvas {
             this.onMouseMove(this.getMousePosition(event.clientX, event.clientY))
         })
 
-
-        this.canvasIntersectionObserver.on(CanvasIntersectionObserver.TOP_THRESHOLD_REACHED, ({ data }) => {
-            data.position.y = -10
-        })
+        // infinite scroll here
+        // this.canvasIntersectionObserver.on(CanvasIntersectionObserver.TOP_THRESHOLD_REACHED, ({ data }) => {
+        //     data.position.y = -10
+        // })
     }
 
     private createGallery() {
@@ -133,6 +142,7 @@ export default class Gallery extends Canvas {
             })
             this.medias.push(media)
         })
+
     }
 
     private createFullscreenImage() {
@@ -164,6 +174,14 @@ export default class Gallery extends Canvas {
     public update() {
         window.requestAnimationFrame(this.update.bind(this));
 
+        // this.cam.z += 0.01
+        // this.cam.x -= 0.01
+        // this.cam.y -= 0.02
+        // this.camera.position.z += 0.01
+        // this.camera.position.x += 0.02
+        // this.cam.y -= 0.01
+
+        this.camera.lookAt([this.cam.x, this.cam.y, this.cam.z])
         super.updateCanvas()
         this.medias.forEach((media: Media) => {
             media.updateFrame()

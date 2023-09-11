@@ -10,12 +10,7 @@ uniform vec2 uViewportSizes;
 
 varying vec2 vUv;
 
-float circle(vec2 uv, vec2 disc_center, float disc_radius, float border_size) {
-  uv -= disc_center;
-  uv*= uViewportSizes;
-  float dist = sqrt(dot(uv, uv));
-  return smoothstep(disc_radius+border_size, disc_radius-border_size, dist);
-}
+
 
 void main() {
   vec4 texture = texture2D(tMap, vUv);
